@@ -1,0 +1,19 @@
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    cursor: pointer;
+    border: 3px solid var(--border);
+}
+.logo a {
+    margin: 0;
+    color: inherit;
+    padding: 0;
+    font-weight: 900;
+    font-size: 15px;
+    text-transform: capitalize;
+    font-family: 'Roboto';
+}

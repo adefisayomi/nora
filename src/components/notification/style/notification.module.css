@@ -1,0 +1,88 @@
+.notification{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    max-width: 250px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    height: 300px;
+    max-height: 300px;
+    border-radius: 5px;
+}
+.notification > h1{
+    margin: 0;
+    text-transform: capitalize;
+    font-family: 'Roboto';
+    font-size: 15px;
+    font-weight: 700;
+    width: 100%;
+    padding: 10px 10px;
+    border-bottom: 0.5px solid rgb(218, 218, 218);
+}
+.notification_body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: scroll;
+}
+@media screen and (max-width: 850px) {
+    .notification{
+        width: 230px;
+        max-width: 230px;
+    }
+}
+/* List section ---- */
+.list{
+    display: flex;
+    /* justify-content: space-between; */
+    width: 100%;
+    padding: 10px;
+    border-bottom: 0.5px solid rgb(218, 217, 217);
+}
+.list_image{
+    display: flex;
+    width: 100%;
+    max-width: 35px;
+    margin-right: 5px;
+    height: 35px;
+    border-radius: 100%;
+    padding: 2px;
+    border: 2px solid rgb(219, 219, 219);
+}
+.list_image img{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+}
+.list_time{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: max-content;
+    /* padding-left: 5px; */
+    justify-content: center;
+    color: rgb(96, 97, 97);
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 12px;
+}
+.list_message{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+.list_message > h1 {
+    margin: 0;
+    padding-bottom: 5px;
+    font-size: 13px;
+    font-family: 'Roboto';
+    font-weight: 700;
+}
+.list_message > p {
+    margin: 0;
+    font-size: 12px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    color: rgb(155, 155, 155);
+}

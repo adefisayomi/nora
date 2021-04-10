@@ -1,0 +1,31 @@
+.order{
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+.order_form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding-left: 10px;
+    height: 100%;
+}
+.order_images {
+    width: 50%;
+    height: 100%;
+}
+
+@media screen and (max-width: 550px){
+    .order{
+        flex-direction: column;
+    }
+    .order_form{
+        width: 100%;
+        padding-top: 10px;
+    }
+    .order_images{
+        width: 100%;
+    }
+}

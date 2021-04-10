@@ -1,0 +1,103 @@
+.signup{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    padding: 5px;
+}
+.signup_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    border: 0.5px solid rgb(226, 226, 226);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.signup_options{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 5px 0;
+    position: relative;
+}
+.signup_google{
+    display: flex;
+    width: 100%;
+    transform: translateX(-150%);
+    transition: 0.4s;
+}
+.signup_username{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transform: translateX(150%); 
+    transition: 0.2s;
+}
+.signup_username > span{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    padding-top: 20px;
+    text-transform: capitalize;
+}
+.signup_username > span > span {
+    width: 1px;
+    background-color: teal;
+    height: 15px;
+}
+.signup_username > span > p {
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: capitalize;
+    color: rgb(136, 142, 148);
+    cursor: pointer;
+    margin: 0;
+}
+.signup_logo{
+    padding-bottom: 10px;
+}
+.signup_toggle{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}
+.signup_toggle > label {
+    font-family: 'Roboto';
+    font-weight: 500;
+    padding-left: 10px;
+    font-size: 11px;
+    text-transform: capitalize;
+    color: rgb(136, 142, 148);
+    cursor: pointer;
+    margin: 0;
+    flex: 1 1;
+}
+.signup_create_link{
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: capitalize;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 0;
+}
+.signup_copyright{
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 11px;
+    color: rgb(136, 142, 148);
+    padding-top: 10px;
+    text-align: center;
+    margin: 0;
+}
+
+@media screen and (max-width: 450px){
+    .signup main {
+        padding: 20px 10px;
+    }
+}

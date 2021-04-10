@@ -1,0 +1,20 @@
+.logo_tab{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 40px;
+    margin: 0 auto;
+    height: 40px;
+    border-radius: 100%;
+    border: 2px solid var(--border);
+    cursor: pointer;
+}
+.logo_tab > h1 {
+    font-family: 'Roboto';
+    font-weight: 900;
+    font-size: 14px;
+    margin: 0;
+    text-transform: capitalize;
+    padding: 0;
+}
