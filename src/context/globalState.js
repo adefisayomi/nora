@@ -23,7 +23,6 @@ const GlobalStateProvider =  ({children}) => {
     const {data: user} = useSWR('/user')
     const {data: business} = useSWR('/business')
     const {data: products} = useSWR('/products')
-    console.log(products)
     // 
     // 
     // 

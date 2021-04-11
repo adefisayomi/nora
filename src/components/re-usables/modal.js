@@ -38,7 +38,7 @@ export default function modal ({openState, onClose, children}) {
                     name= 'cancel'
                     size= 'large'
                     link
-                    onClick= {close}
+                    onClick= {onClose || close}
                 />
             </header>
             {children}

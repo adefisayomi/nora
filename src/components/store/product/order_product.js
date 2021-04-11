@@ -9,46 +9,27 @@ import { useRouter } from "next/router";
 import { GlobalState } from "../../../context/globalState";
 import { Profile, CommentForm, OrderForm } from './templates';
 
-export default function View () {
+export default function View ({close, product}) {
 
     const router = useRouter()
     const {UI} = GlobalState()
     const [form, setForm] = useState({})
-    
-    // useEffect(() => {
-    //     const getImagesById = async () => {
-    //         const res = await axios.get(`/products/${router.query.id}`)
-    //         console.log(res.data.data)
-    //         return setForm({
-    //             description: res.data.data.details?.description,
-    //             title: res.data.data.details?.title,
-    //             images: res.data.data.details?.images
-    //         })
-    //     }
-    //     getImagesById()
-    // }, [router.query.id])
 
-    const img = [
-        {url:'https://images.pexels.com/photos/1212984/pexels-photo-1212984.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',  id:1 },
-        {url:'https://images.pexels.com/photos/1212984/pexels-photo-1212984.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',  id:1 },
-        {url:'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',  id:1 },
-    ]
 
+console.log(product)
     return(
-    //    <Store>
-           <Modal>
+           <Modal onClose= {close}>
                 <div className= {styles.order}>
                     <div className= {styles.order_images}>
-                        <Slider slides= {img} maxHeight= '300px' />
+                        <Slider images= {product.details.images} maxHeight= '300px' />
                     </div>
                     <div className= {styles.order_form}>
-                        <Profile />
-                        <OrderForm />
+                        <Profile id= {product.author._id} title= {product.details.title} />
+                        <OrderForm props= {{ description: product.details.description, price: product.details.price }} />
                     </div>
                 </div>
                 <Divider />
                 <CommentForm />
            </Modal>
-    //    </Store> 
     )
 }

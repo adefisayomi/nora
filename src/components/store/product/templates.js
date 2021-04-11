@@ -1,38 +1,67 @@
 import styles from './style/templates.module.css'
-import {Label, Header, Icon, Form, Input, Checkbox, Button} from 'semantic-ui-react'
+import {Label, Header, Icon, Form, Input, Placeholder, Button} from 'semantic-ui-react'
 import {useRouter} from 'next/router'
 import { GlobalState } from '../../../context/globalState'
-import {useState} from 'react'
-import useSWR from 'swr'
+import {useEffect, useState} from 'react'
+import {ProfileTab} from '../../user/profileTab'
+import axios from 'axios'
 
 
 
-export const Profile = ({author= {username: 'dolapo', business_name: 'doodles'}, details= { title: 'cooper shiort' }}) => {
+export const Profile = ({id, title}) => {
+
+    const {UI} = GlobalState()
+    const [loading, setLoading] = useState(true)
+    const [author, setAuthor] = useState('')
+    const getAuthor = async () => {
+       const res = await axios.get(`/user/${id}`)
+       if(res && res.data) {
+           setLoading(false)
+           setAuthor(res.data.data)
+       }
+       else setLoading(true)
+    }
+     
+    useEffect(() => {
+        getAuthor()
+    }, [id])
 
 
-const {UI} = GlobalState()
     return(
         <div className= {styles.author}>
-            <Header image style= {{ margin: '0', cursor: 'pointer', color: UI.color }} >
-                <Icon size= 'mini' circular= {!author.image} >
-                    {author.image ?
+            { !loading && author && author._id ? 
+            <span>
+                <Header image style= {{ margin: '0', cursor: 'pointer', color: UI.color }} >
+                <Icon size= 'mini' circular= {!author.image?.url} >
+                    {author.image?.url ?
                         <span className= {styles.author_image}>
-                            <img src= {author.image} />
-                        </span> :  author.username.split('')[0].toLocaleUpperCase()
+                            <img src= {author.image.url} />
+                        </span> :  (author?.username || author?.first_name).split('')[0].toLocaleUpperCase()
                     }
                 </Icon>
                 <Header.Content>
-                        <h4>{ author.business_name || ''}</h4>
-                    <Header.Subheader style= {{ color: UI.color }}><h5>{details.title}</h5></Header.Subheader>
-                </Header.Content>
+                        <h4>@{ author.username || author?.first_name}</h4>
+                    <Header.Subheader style= {{ color: UI.color }}><h5>{title || '' }</h5></Header.Subheader>
+                </Header.Content> 
             </Header>
+            </span>
+            :
+            <span>
+                <Placeholder inverted= {UI.dark ? true : false} >
+                 <Placeholder.Header image >
+                 <Placeholder.Line />
+                 <Placeholder.Line />
+                 </Placeholder.Header>
+               </Placeholder>
+            </span>
+            }
             <Icon name= 'ellipsis horizontal' link />
             </div>
     )
 }
 
 //
-export const Action = ({path}) => {
+export const Action = ({onClick}) => {
 
     const router = useRouter()
     const {UI} = GlobalState()
@@ -46,6 +75,7 @@ export const Action = ({path}) => {
                         style= {{ fontSize:'15px' }}
                         fitted
                         link
+                        onClick= {onClick?.message}
                     />
                     <span style= {{ paddingLeft: '10px', fontSize: '10px', fontFamily: 'Roboto' }}>23</span>
                 </Label>
@@ -56,6 +86,7 @@ export const Action = ({path}) => {
                         style= {{ fontSize:'15px' }}
                         fitted
                         link
+                        onClick= {onClick?.like}
                         color= 'red'
                     />
                     <span style= {{ paddingLeft: '8px', fontSize: '10px', fontFamily: 'Roboto' }}>23</span>
@@ -67,7 +98,7 @@ export const Action = ({path}) => {
                 color=  {UI.dark ? 'black' : 'teal'}
                 inverted= {UI.dark? true : false}
                 link
-                onClick= {path}
+                onClick= {onClick?.cart}
                 style= {{ fontSize:'16px' }}
             />
         </div>
@@ -76,10 +107,10 @@ export const Action = ({path}) => {
 
 //
 
-export const OrderForm = () => {
+export const OrderForm = ({props}) => {
 
   const {UI} = GlobalState()
-  const [form, setForm] = useState({})
+  const [form, setForm] = useState({description: props.description, price: props.price})
   const getForm = () => setForm({...form, [e.target.name]: e.target.value})
   const [loading, setLoading] = useState(false)
   const [note, setNote] = useState(true)
@@ -94,13 +125,11 @@ export const OrderForm = () => {
     <div className= {styles.order_form}>
      <Form>
           <Label tag color= 'grey' style= {{ margin: '10px 0',  width: 'fit-content' }}>
-              $12, 000
+              ${form.price}
           </Label>
           <Form.Field>
               <label style= {{ color: 'teal' }}>Description</label>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas, tenetur! Modi obcaecati consequuntur nobis harum veritatis corrupti temporibus accusamus magnam, enim delectus ad 
-              </p>
+              <p>{form.description}</p>
           </Form.Field>
           <Form.Group inline widths= 'equal'>
               <label style= {{ color: 'teal' }} >Quantity</label>
@@ -124,13 +153,13 @@ export const OrderForm = () => {
 }
 
 
-export const CommentForm = () => {
+export const CommentForm = ({id}) => {
 
-  const {UI} = GlobalState()
+    const {UI,user} = GlobalState()
 
   return(
     <div className= {styles.comment} style= {{ backgroundColor: UI.bgColor }}>
-        <img src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt=""/>
+        <ProfileTab width= '30px' />
         <textarea
           style= {{ color: UI.color}}
           placeholder= 'Post a Comment...'
