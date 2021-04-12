@@ -18,7 +18,7 @@ console.log(product)
     return(
            <Modal onClose= {close}>
                 <div className= {styles.order}>
-                    <div className= {styles.order_images}>
+                    <div className= {styles.order_images} style= {{ borderColor: UI.body }}>
                         <Slider images= {product.details.images} maxHeight= '300px' />
                     </div>
                     <div className= {styles.order_form}>
