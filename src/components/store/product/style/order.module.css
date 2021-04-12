@@ -16,6 +16,9 @@
 }
 .order_images {
     width: 50%;
+    border: 2px solid rgb(219, 219, 219);
+    border-radius: 5px;
+    min-height: 280px;
     height: 100%;
 }
 

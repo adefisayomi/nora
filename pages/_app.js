@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }) {
   return (
     <SWRConfig
       value={{
-        revalidateOnFocus: true,
+        revalidateOnFocus: false,
         refreshInterval: 0,
         fetcher: (...args) => axios(...args).then(res => res?.data.data)
       }}

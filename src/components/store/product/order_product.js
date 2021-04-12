@@ -1,10 +1,8 @@
-// import Store from "./index";
 import Modal from '../../re-usables/modal'
-import styles from './style/view.module.css'
+import styles from './style/order.module.css'
 import {Divider} from 'semantic-ui-react'
 import Slider from '../../slider/slider'
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { GlobalState } from "../../../context/globalState";
 import { Profile, CommentForm, OrderForm } from './templates';
