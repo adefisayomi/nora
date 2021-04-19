@@ -4,3 +4,18 @@
     padding: 10px;
     margin: 10px;
 }
+.modal_loader{
+    padding: 20px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal_content{
+    font-family: 'Roboto';
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize;
+    font-size: 12px;
+}

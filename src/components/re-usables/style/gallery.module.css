@@ -6,32 +6,32 @@
     width: 100%;
     max-width: 900px;
 }
-.image_gallery div {
+.image_gallery_div {
     display: flex;
     padding: 5px;
-    height: 250px;
+    height: 230px;
     transition: 0.3s;
     width: calc(100%/3);
 }
-.image_gallery div img {
+.image_gallery_div > img {
     width: 100%;
     object-fit: cover;
 }
 @media screen and (max-width: 800px) {
-    .image_gallery div {
+    .image_gallery_div {
         height: 220px;
         transition: 0.3s;
     }
 }
 @media screen and (max-width: 700px) {
-    .image_gallery div {
+    .image_gallery_div {
         width: calc(100%/3);
         height: 180px;
         transition: 0.3s;
     }
 }
 @media screen and (max-width: 550px) {
-    .image_gallery div {
+    .image_gallery_div {
         width: calc(100%/2);
         height: 200px;
         transition: 0.3s;
@@ -39,7 +39,7 @@
     }
 }
 @media screen and (max-width: 450px) {
-    .image_gallery div {
+    .image_gallery_div {
         width: calc(100%/2);
         height: 150px;
         transition: 0.3s;
@@ -54,31 +54,51 @@
     padding: 5px;
     max-width: 900px;
 }
-.gallery div {
+.gallery_div {
     display: flex;
     padding: 5px;
     height: 250px;
     transition: 0.3s;
-    width: calc(100%/3);
+    width: calc(33%);
+    position: relative;
 }
-.gallery div span {
+.gellery_span {
     width: 100%;
     border: 0.5px solid rgb(133, 133, 133);
 }
+.gallery_span_overlay{
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+}
+.gallery_span_overlay > span {
+    background-color: rgba(0, 0, 0, 0.24);
+    width: 100%;
+    transition: 0.4s;
+    padding: 10px; 
+}
+.gallery_div:hover .gallery_span_overlay {
+    display: flex;
+    transition: 0.4s;
+}
 @media screen and (max-width: 800px) {
-    .gallery div {
+    .gallery_div {
         height: 220px;
         transition: 0.3s;
     }
 }
 @media screen and (max-width: 700px) {
-    .gallery div {
+    .gallery_div {
         height: 180px;
         transition: 0.3s;
     }
 }
 @media screen and (max-width: 550px) {
-    .gallery div {
+    .gallery_div {
         width: calc(100%/2);
         height: 200px;
         transition: 0.3s;
@@ -86,7 +106,7 @@
     }
 }
 @media screen and (max-width: 450px) {
-    .gallery div {
+    .gallery_div {
         width: calc(100%/2);
         height: 150px;
         transition: 0.3s;

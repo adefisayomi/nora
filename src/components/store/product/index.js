@@ -5,14 +5,22 @@ import styles from './style/product.module.css'
 import { Profile, Action } from './templates'
 import {useState} from 'react'
 import Order from './order_product'
+import axios from 'axios'
+import { trigger } from 'swr'
 
 export default function Product ({props}) {
 
-    const {UI} = GlobalState()
+    const {UI, user} = GlobalState()
     const [showProd, setShowProd] = useState(false)
     const openShowProd = () => setShowProd(true)
     const closeShowProd = () => setShowProd(false)
-
+    const handleLike = async () => {
+        if(user) {
+            await axios.post(`/like/${props._id}`)
+            trigger('/products')
+        }
+    }
+    
     return(
         <>
         <div className= {styles.product} style= {{ border: UI.border, backgroundColor: UI.bgColor }}>
@@ -22,7 +30,7 @@ export default function Product ({props}) {
                 <Slider images= {props.details.images} />
             </div>
             <Divider />
-            <Action onClick= {{cart: openShowProd }} />
+            <Action meta= {props.meta} onClick= {{cart: openShowProd, like: handleLike }} />
         </div>
         { showProd && <Order close= {closeShowProd} product= {props} />}
         </>

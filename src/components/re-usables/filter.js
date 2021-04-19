@@ -5,15 +5,15 @@ import styles from './style/filter_header.module.css'
 
 export default function Filter ({onChange}) {
 
-    const {UI, business} = GlobalState()
+    const {UI, business, products} = GlobalState()
     const businessList = business ? business.map(bis => {
         return ({ key: bis._id , text: bis.business_name, value: bis._id })
     }) : []
 
     const menu = [
         {icon: 'users', value: 212,name: 'clients'},
-        {icon: 'handshake', value: 21, name: 'business'},
-        {icon: 'cart', value: 897, name: 'products'},
+        {icon: 'handshake', value: business?.length || 0, name: 'business'},
+        {icon: 'cart', value: products?.length || 0, name: 'products'},
     ]
 
     return(
@@ -30,7 +30,7 @@ export default function Filter ({onChange}) {
             </span>
             <span className= {styles.filter_tags}>
                 {menu.map((menu, index) => (
-                  <Label basic circular as= 'a' key= {index}>
+                  <Label basic as= 'a' circular key= {index}>
                     <Icon
                         name= {menu.icon}
                         circular

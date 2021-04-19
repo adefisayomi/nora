@@ -12,7 +12,7 @@ import axios from 'axios'
 export default function Wrapper ({children}) {
 
     const router = useRouter()
-    const {UI, setGlobalAlert} = GlobalState()
+    const {UI, setGlobalAlert, user, setRestriction} = GlobalState()
     const path = router.asPath.split('/').pop().replace('/', '|')
     const forbidenRoute = ['login', 'signup', 'reset']
     const [showNav, setShowNav] = useState(true)
@@ -21,6 +21,10 @@ export default function Wrapper ({children}) {
             setShowNav(false)
         }
         else setShowNav(true)
+    }
+    // All redirects
+    const redirect = () => {
+        if(!user && router.asPath.includes('dashboard')) router.push('/')
     }
     // 
     // Axios defaults
@@ -33,6 +37,7 @@ export default function Wrapper ({children}) {
             setGlobalAlert({message: res.data.message, type: res.data.success ? 'success' : 'error'})
         }
         return res
+        
     }, err => {
         return Promise.reject(err)
     })
@@ -40,6 +45,7 @@ export default function Wrapper ({children}) {
     // 
     useEffect(() => {
         toggleShowNav()
+        redirect()
     }, [path])
 
     return(

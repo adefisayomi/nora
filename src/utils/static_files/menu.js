@@ -2,9 +2,16 @@
 
 
 export const businessCategory = [
-  {key: 1, text: 'Clothing', value: 'clothing'},
+  {key: 1, text: 'Fashion deisgning & Tailoring', value: 'clothing'},
   {key: 2, text: 'Shoe Making', value: 'shoe_making'},
-  {key: 3, text: 'Foods', value: 'foods'},
+  {key: 3, text: 'Catering', value: 'Catering'},
+  {key: 4, text: 'House cleaning', value: 'House cleaning'},
+  {key: 5, text: 'Copy or content writing', value: 'Copy or content writing'},
+  {key: 6, text: 'Graphics design', value: 'Graphics design'},
+  {key: 7, text: 'Interior', value: 'Interior'},
+  {key: 8, text: 'Photography', value: 'Photography'},
+  {key: 9, text: 'Real estate', value: 'Real estate'},
+  {key: 10, text: 'Personal trainer', value: 'Personal trainer'}
 ]
 
 export const asideMenu =
@@ -24,8 +31,8 @@ export const asideMenu =
       {
         text: 'business',
         value: 'business',
-        icon: 'handshake',
-        path: `dashboard/business`,
+        icon: 'shopping bag',
+        path: `/dashboard/store`,
       },
     ]
 
@@ -37,10 +44,10 @@ export const dashboardMenu = [
       path: '/dashboard/store',
     },
     {
-      text: 'clients',
-      value: 'clients',
-      icon: 'users',
-      path: '/dashboard/clients',
+      text: 'business',
+      value: 'business',
+      icon: 'handshake',
+      path: '/dashboard/business',
     },
     {
       text: 'wallet',
@@ -58,7 +65,7 @@ export const dashboardMenu = [
       text: 'profile',
       value: 'profile',
       icon: 'user',
-      path: '/user/dashboard/profile',
+      path: '/user',
     },
   ]
   export const cardMenu = [

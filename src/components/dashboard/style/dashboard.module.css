@@ -60,10 +60,6 @@
     left: 0;
 }  
 .dashboard_navigation{
-    display: flex;
-    width: 100%;
-    max-width: 150px;
-    border-radius: 5px;
     position: fixed;
     top: 100px;
     z-index: 1;

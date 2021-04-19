@@ -3,19 +3,16 @@ import Layout from '../wrapper/layout'
 import Product from '../store/product/'
 import { GlobalState } from '../../context/globalState'
 import axios from 'axios'
+import useSWR, { mutate, trigger } from 'swr'
+import { useEffect, useState } from 'react'
 
-// export async function getServerSideProps(context) {
-//     const res = await axios.get('http://localhost:4000/api')
 
-//     return {
-//       props: {data: res.data}, 
-//     }
-//   }
 
-export default function Home ({children, data}) {
+export default function Home ({children}) {
 
-    const {products} = GlobalState()
-    
+    const {data: products} = useSWR(`/products`)
+    console.log(products)
+      
     return(
         <Layout>
             <div className= {styles.home} >

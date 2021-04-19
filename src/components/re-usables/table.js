@@ -12,7 +12,7 @@ export const TableLayout = ({children}) => {
   const {UI} = GlobalState()
 
   return(
-    <Table basic='very' selectable unstackable striped celled style= {{ flex: '1 1', color: UI.color }}>
+    <Table basic='very' selectable unstackable striped celled style= {{ flex: '1 1', color: UI.color }} inverted = {UI.dark ? true : false}>
       {children}
     </Table>
   )
@@ -24,7 +24,7 @@ export const TableBody = ({business}) => {
   const router = useRouter()
 
   return(
-    <Table.Body  >
+    <Table.Body >
       {business && business.map(bus => (
         <Table.Row style= {{ color: UI.color, cursor: 'pointer'}} key= {uuid()} onClick= {() => router.push(`${router.asPath}/${bus._id}`)} >
         <Table.Cell  style= {{
@@ -40,8 +40,8 @@ export const TableBody = ({business}) => {
                         <span className= {styles.profile_tab_image} style= {{ border: UI.border,backgroundColor: UI.bgColor }}>
                             <img src= {bus.logo.url} alt="profile picture"/>
                         </span>  :
-                        <Icon circular inverted >
-                            <span className= {styles.profile_tab_text}>{(bus?.business_name).split('').shift()}</span> 
+                        <Icon circular color= 'teal' inverted= {UI.dark ? true : false} >
+                            <span className= {styles.profile_tab_text}>{(bus?.business_name)[0]}</span> 
                         </Icon> 
                         }
               </span>
@@ -69,7 +69,7 @@ export const TableHeader = ({headers}) => {
 
     return(
       <Table.Header style= {{ color: UI.color}}>
-          <Table.Row style= {{ color: UI.color}}>
+          <Table.Row style= {{ color: UI.color, }}>
             {headers && headers.map(head => (
               <Table.HeaderCell key= {uuid()} style= {{ 
                 padding: '10px',

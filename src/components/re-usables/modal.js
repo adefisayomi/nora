@@ -1,4 +1,4 @@
-import { Icon, Modal } from "semantic-ui-react";
+import { Icon, Loader, Modal } from "semantic-ui-react";
 import {useRouter} from 'next/router'
 import { useState } from "react";
 import styles from './style/modal.module.css'
@@ -6,7 +6,7 @@ import {GlobalState} from '../../context/globalState'
 
 
 
-export default function modal ({openState, onClose, children}) {
+export default function modal ({openState, onClose, children, maxWidth, content, loading}) {
 
     const router = useRouter()
     const {UI} = GlobalState()
@@ -19,11 +19,11 @@ export default function modal ({openState, onClose, children}) {
 
     
     return (
-        <div className= {styles.modal}>
+        <div className= {styles.modal} style= {{ maxWidth: maxWidth ? maxWidth : '620px' }}>
         <Modal
             className= {styles.modal}
             open= {openState || open}
-            style= {{backgroundColor: UI.bgColor, color:UI.color }}
+            style= {{backgroundColor: UI.bgColor, color:UI.color, maxWidth: maxWidth ? maxWidth : '620px' }}
             onClose= {onClose || goBack}
         >
             <header
@@ -41,6 +41,12 @@ export default function modal ({openState, onClose, children}) {
                     onClick= {onClose || close}
                 />
             </header>
+            {loading && 
+                <div className= {styles.modal_loader} style= {{ color: UI.color, backgroundColor: UI.bgColor }}>
+                    <Loader active size= 'medium'>
+                        <p className= {styles.modal_content}>{content}</p>
+                    </Loader>
+                </div>}
             {children}
         </Modal>
         </div>

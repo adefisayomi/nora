@@ -7,6 +7,7 @@
   .slider_container > div {
       display: flex;
       width: 100%;
+      min-height: inherit;
       max-height: inherit;
   }
   .slider_container > div > img {

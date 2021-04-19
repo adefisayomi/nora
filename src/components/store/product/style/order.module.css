@@ -8,7 +8,7 @@
 .order_form{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 50%;
     padding-left: 10px;
     height: 100%;
@@ -18,11 +18,15 @@
     width: 50%;
     border: 2px solid rgb(219, 219, 219);
     border-radius: 5px;
-    min-height: 280px;
+    min-height: 250px;
     padding: 5px;
     height: 100%;
 }
-
+.order_comments{
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+}
 @media screen and (max-width: 550px){
     .order{
         flex-direction: column;

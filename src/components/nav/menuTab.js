@@ -30,7 +30,7 @@ const MenuTab = memo(() => {
         <>
         <div className= {styles.menu_tab}>
             <div className= {styles.menu}>
-                {user && <span className= {styles.menu_tab_mobile}><ProfileTab width= '30px' /></span>}
+                {user && <span className= {styles.menu_tab_mobile}><UserTab width= '30px' /></span>}
                 {asideMenu && asideMenu.map(menu => (
                     <span key= {uuid()} className= {styles.menu_tab_mobile}>
                        <Icon
@@ -71,3 +71,25 @@ const MenuTab = memo(() => {
 })
 
 export default MenuTab
+
+export const UserTab = ({width}) => {
+
+    const {UI, user} = GlobalState()
+    const router = useRouter()
+
+    return (
+        <div className= {styles.profile_tab}
+            style= {{ width: width, height: width, backgroundColor: UI.bgColor, color: UI.color }}
+            onClick= {() => router.push(`/${user.username || user._id}`)}
+         >
+            { user?.image && user.image?.url ?
+                <span className= {styles.profile_tab_image}>
+                    <img src= {user.image.url} alt="profile-picture"/>
+                </span> :
+                <span>
+                    <h1> { user && user.username && user.username[0] || user.first_name && user.first_name[0] || '' } </h1>
+                </span>
+            }
+        </div>
+    )
+}

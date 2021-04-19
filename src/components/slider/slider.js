@@ -1,4 +1,3 @@
-import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
 import { useState, useEffect } from 'react'
 import styles from './style/slider.module.css'
@@ -26,17 +25,17 @@ const Slider = ({maxHeight, dot= true, images}) => {
   }, [images])
 
   return (
-    <div ref={sliderRef} className= {`keen-slider ${styles.slider_container}`} style= {{ maxHeight: maxHeight }}>
-       {loading ?
+    <div ref={sliderRef} className= {`keen-slider ${styles.slider_container}`}>
+       {/* {loading ?
           <Placeholder inverted= {UI.dark ? true : false} style={{ height: '50vh', width: '100%' }}>
             <Placeholder.Image />
-          </Placeholder> : 
-          images && images.map((img, index) => (
+          </Placeholder> :  */}
+         { images && images.map((img, index) => (
             <div key= {index} className="keen-slider__slide" >
                 <img src= {img.url} alt="product-picture" key={img.id}/>
             </div>
-        ))
-      }
+        ))}
+      {/* } */}
       {!loading && dot && slider &&
             <div className= {styles.slider_dots}>
                 {[...Array(slider.details().size).keys()].map((index) => {

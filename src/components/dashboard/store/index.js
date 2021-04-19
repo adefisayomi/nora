@@ -1,4 +1,4 @@
-import Dashboard from '..'
+import Dashboard from '../dashboard'
 import styles from './style/store.module.css'
 import Footer from '../../re-usables/footer'
 import { useRouter } from "next/router";
@@ -6,7 +6,7 @@ import Empty from "../../re-usables/empty";
 import Filter from "../../re-usables/filter";
 import { GlobalState } from "../../../context/globalState";
 import Gallery from'../../re-usables/gallery'
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, useMemo } from "react";
 
 
 export default function Store ({children}) {
@@ -22,7 +22,6 @@ export default function Store ({children}) {
     useEffect(() => {
         setCategory(products)
     }, [products])
-    console.log(category)
     
     const getBusiness = useCallback((e, {value}) => {
         const res = products?.filter(prod => prod.details.business_id == value)

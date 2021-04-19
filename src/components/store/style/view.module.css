@@ -1,0 +1,17 @@
+.view{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+}
+.view_action_button{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+@media screen and (max-width: 500px) {
+    .view{
+        padding: 10px;
+    }
+}

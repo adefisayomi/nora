@@ -18,11 +18,11 @@ const GlobalStateProvider =  ({children}) => {
     const setGlobalAlert = useCallback(({message, type}) => {
         setAlert({message: message, type: type})
     }, [alert])
-    // 
+    //
     // 
     const {data: user} = useSWR('/user')
-    const {data: business} = useSWR('/business')
-    const {data: products} = useSWR('/products')
+    const {data: business} = useSWR( () => user ? `/business/${user._id}` : null, {revalidateOnMount: true})
+    const {data: products} = useSWR(() => user ? `/products/${user._id}` : null, {revalidateOnMount: true})
     // 
     // 
     // 

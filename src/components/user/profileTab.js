@@ -4,17 +4,15 @@ import styles from './style/profile_tab.module.css'
 
 
 
-export const ProfileTab = ({width= '33px'}) => {
+export const ProfileTab = ({width= '33px', user}) => {
 
-    const {user, UI} = GlobalState()
-    const router = useRouter()
-
+    const {UI} = GlobalState()
+    
     return(
         <>
         {user && 
         <div className= {styles.profile_tab}
             style= {{ width: width, height: width, backgroundColor: UI.bgColor, color: UI.color }}
-            onClick= {() => router.replace(`${user.username || user._id}`)}
          >
             { user?.image && user.image?.url ?
                 <span className= {styles.profile_tab_image}>

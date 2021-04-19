@@ -1,10 +1,12 @@
 import styles from './style/templates.module.css'
-import {Label, Header, Icon, Form, Input, Placeholder, Button} from 'semantic-ui-react'
+import {Label, Header, Icon, Form, Input, Placeholder, Button, Comment} from 'semantic-ui-react'
 import {useRouter} from 'next/router'
 import { GlobalState } from '../../../context/globalState'
 import {useEffect, useState} from 'react'
-import {ProfileTab} from '../../user/profileTab'
+import ProfileTab from '../../re-usables/profileTab'
 import axios from 'axios'
+import useSWR, { trigger } from 'swr'
+import moment from 'moment'
 
 
 
@@ -26,7 +28,7 @@ export const Profile = ({id, title}) => {
         getAuthor()
     }, [id])
 
-
+    
     return(
         <div className= {styles.author}>
             { !loading && author && author._id ? 
@@ -61,7 +63,7 @@ export const Profile = ({id, title}) => {
 }
 
 //
-export const Action = ({onClick}) => {
+export const Action = ({onClick, meta}) => {
 
     const router = useRouter()
     const {UI} = GlobalState()
@@ -72,7 +74,7 @@ export const Action = ({onClick}) => {
                 <Label circular basic style= {{ backgroundColor: UI.bgColor, color: UI.color }}>
                     <Icon
                         name= 'send'
-                        style= {{ fontSize:'15px' }}
+                        style= {{ fontSize:'16px' }}
                         fitted
                         link
                         onClick= {onClick?.message}
@@ -83,13 +85,13 @@ export const Action = ({onClick}) => {
                 <Label circular basic style= {{ backgroundColor: UI.bgColor, color: UI.color }}>
                     <Icon
                         name= 'like'
-                        style= {{ fontSize:'15px' }}
+                        style= {{ fontSize:'16px' }}
                         fitted
                         link
                         onClick= {onClick?.like}
                         color= 'red'
                     />
-                    <span style= {{ paddingLeft: '8px', fontSize: '10px', fontFamily: 'Roboto' }}>23</span>
+                    <span style= {{ paddingLeft: '8px', fontSize: '10px', fontFamily: 'Roboto' }}>{meta.likes.length}</span>
                 </Label>
             </span>
             <Icon 
@@ -156,20 +158,77 @@ export const OrderForm = ({props}) => {
 export const CommentForm = ({id}) => {
 
     const {UI,user} = GlobalState()
+    const [form, setForm] = useState({comment: ''})
+    const resetForm = () => setForm({comment: ''})
+    const [loading, setLoading] = useState(false)
+    const getForm = (e) => setForm({comment: e.target.value})
+    // 
+    const handleComment = async () => {
+        if(user) {
+            setLoading(true)
+            await axios.post(`/comment/${id}`, form)
+            resetForm()
+            trigger('/products')
+            setLoading(false)
+        }
+    }
 
   return(
     <div className= {styles.comment} style= {{ backgroundColor: UI.bgColor }}>
         <ProfileTab width= '30px' />
         <textarea
-          style= {{ color: UI.color}}
+          name= 'comment'
+          onChange= {getForm}
+          value= {form.comment}
           placeholder= 'Post a Comment...'
           />
         <Icon 
             name= 'send'
             link
+            loading= {loading}
+            color= 'teal'
             inverted= {UI.dark ? true : false}
+            onClick= {handleComment}
             circular
         />
     </div> 
   )
+}
+
+export const Comments = ({comment, product_id}) => {
+
+    const {UI, user} = GlobalState()
+    const {data} = useSWR(`/user/${comment.body._id}`)
+    // 
+    const handleDelete = async () => {
+        if (user) {
+            await axios.delete(`/comment/${user._id}/${product_id}/${comment._id}`)
+            trigger('/products')
+        }
+    }
+
+    return (
+        <div className= {styles.comments} style= {{ color: UI.color }}>
+            {data && <Comment.Group threaded >
+            <Comment>
+                <Comment.Avatar as='a' src= {data.image.url || 'https://st3.depositphotos.com/6672868/14376/v/600/depositphotos_143767633-stock-illustration-user-profile-group.jpg'}   />
+                <Comment.Content>
+                    <Comment.Author as='a' style= {{ color: UI.color }}>{data.username || data.first_name}</Comment.Author>
+                    <Comment.Metadata>
+                    <span style= {{ color: 'teal', fontFamily: 'Roboto', fontSize: '10px'  }}>{moment().startOf('hour').fromNow(comment.date)}</span>
+                    </Comment.Metadata>
+                    <Comment.Text style= {{ color: UI.color }}>{comment.body?.comment}</Comment.Text>
+                    <Comment.Actions>
+                    <a style= {{ color: 'teal' }}>Reply</a>
+                    {user._id == comment.body._id && <>
+                        <a style= {{ color: 'grey' }}>Edit</a> 
+                        <a onClick= {handleDelete} style= {{ color: 'grey' }}>Delete</a>
+                        </>
+                    }
+                    </Comment.Actions>
+                </Comment.Content>
+            </Comment>
+            </Comment.Group>}
+        </div>
+    )
 }

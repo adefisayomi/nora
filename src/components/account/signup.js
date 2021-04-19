@@ -4,6 +4,7 @@ import { GlobalState } from "../../context/globalState";
 import {GoogleButton} from './buttons'
 import Link from 'next/link'
 import styles from './style/signup.module.css'
+import axios from 'axios'
 import LogoTab from '../wrapper/logoTab'
 
 
@@ -26,7 +27,7 @@ const Signup = () => {
         setLoading(true)
         //
         try{
-            const res = await axios.post('/user/create', form)
+            const res = await axios.post('/user/signup', form)
             await signInWithToken(res.data.data)
             setLoading(false)
             return setForm({})
