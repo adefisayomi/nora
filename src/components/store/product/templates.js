@@ -220,7 +220,7 @@ export const Comments = ({comment, product_id}) => {
                     <Comment.Text style= {{ color: UI.color }}>{comment.body?.comment}</Comment.Text>
                     <Comment.Actions>
                     <a style= {{ color: 'teal' }}>Reply</a>
-                    {user._id == comment.body._id && <>
+                    { user && user._id == comment.body._id && <>
                         <a style= {{ color: 'grey' }}>Edit</a> 
                         <a onClick= {handleDelete} style= {{ color: 'grey' }}>Delete</a>
                         </>

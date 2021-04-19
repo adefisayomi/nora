@@ -28,7 +28,7 @@ export default function Wrapper ({children}) {
     }
     // 
     // Axios defaults
-    axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? 'http://localhost:5000/api' : 'https://rango-server.herokuapp.com/api'
+    axios.defaults.baseURL = 'https://rango-server.herokuapp.com/api'
     axios.defaults.headers['Content-Type'] = 'application/json'
     axios.defaults.withCredentials = true
     // 

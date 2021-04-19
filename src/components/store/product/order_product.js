@@ -10,7 +10,7 @@ import { Profile, CommentForm, OrderForm, Comments } from './templates';
 export default function View ({close, product}) {
 
     const router = useRouter()
-    const {UI} = GlobalState()
+    const {UI, user} = GlobalState()
     const [form, setForm] = useState({})
 
 
@@ -28,7 +28,7 @@ export default function View ({close, product}) {
                 </div>
                 <Divider />
                 
-                    {product && product.meta.comments.length > 0 && 
+                    { product && product.meta.comments.length > 0 && 
                       <div className= {styles.order_comments}>
                          {product.meta.comments.map((com, index) => <Comments comment= {com} key= {index} product_id= {product._id}/> )}
                       </div>

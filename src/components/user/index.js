@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import Loader from '../re-usables/loader'
+import EmptyUser from '../re-usables/emptyUser'
 
 
 export default function User ({children}) {
@@ -51,7 +52,9 @@ export default function User ({children}) {
                         <Divider  />
                         <ImageGallery images= {images} />
                     </div>
-                  </>
+                  </> :
+                  data == null ?
+                  <EmptyUser content= 'User not found' />
                     :
                     <Loader title= 'User Profile' />
                 }
