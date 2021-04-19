@@ -175,7 +175,7 @@ export const CommentForm = ({id}) => {
 
   return(
     <div className= {styles.comment} style= {{ backgroundColor: UI.bgColor }}>
-        <ProfileTab width= '30px' />
+        <ProfileTab width= '30px' url= {user.image.url} username= {user.username} id= {user._id}/>
         <textarea
           name= 'comment'
           onChange= {getForm}

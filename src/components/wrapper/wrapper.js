@@ -24,11 +24,13 @@ export default function Wrapper ({children}) {
     }
     // All redirects
     const redirect = () => {
-        if(!user && router.asPath.includes('dashboard')) router.push('/')
+        if(!user && router.asPath.includes('dashboard') || user && forbidenRoute.includes(path)) {
+            router.push('/')
+        }
     }
     // 
     // Axios defaults
-    axios.defaults.baseURL = 'https://rango-server.herokuapp.com/api'
+    axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? 'http://localhost:5000/api' : 'https://rango-server.herokuapp.com/api'
     axios.defaults.headers['Content-Type'] = 'application/json'
     axios.defaults.withCredentials = true
     // 
@@ -46,7 +48,7 @@ export default function Wrapper ({children}) {
     useEffect(() => {
         toggleShowNav()
         redirect()
-    }, [path])
+    }, [path, user])
 
     return(
         <div style= {{ backgroundColor: UI.body, color: UI.color }} className= {styles.wrapper}>

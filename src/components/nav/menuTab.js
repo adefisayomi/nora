@@ -55,7 +55,10 @@ const MenuTab = memo(() => {
                     {asideMenu.map(nav => <li className= {styles.menu_tab_mobile_dropDown} style= {{ borderBottom: UI.border}} key= {uuid()} onClick= { () => navigate(nav.path)}>
                         {nav.text}
                     </li>)}
-                    <li style= {{ borderBottom: UI.border}} onClick= {doLogout}>Logout</li>
+                    {user ? 
+                    <li style= {{ borderBottom: UI.border}} onClick= {doLogout}>Logout</li> : 
+                    <li style= {{ borderBottom: UI.border}} onClick= {() => router.push('/account/login')}>Login</li>
+                    }
                     <li className= {styles.menu_tab_toggle_theme} style= {{ borderBottom: UI.border}}>
                         <Checkbox toggle onChange= {toggleUI}/>
                         <h4>{UI?.dark ? 'Light Mode' : 'Dark Mode'}</h4>
