@@ -22,7 +22,7 @@ export default function Notification () {
     }, [alert?.message])
 
     return (
-        <div className= {styles.notification} style= {{ backgroundColor: UI.bgColor, border: UI.border }}>
+        <div className= {styles.notification} style= {{ backgroundColor: UI.bgColor, border: !UI.dark && UI.border }}>
             <h1 style= {{ borderBottom: UI.border }}>Notification</h1>
             <div className= {styles.notification_body} >
                 {notification && notification.length > 0 && notification.map((not, index) => (

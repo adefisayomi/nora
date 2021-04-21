@@ -16,10 +16,7 @@
 }
 .order_images {
     width: 50%;
-    border: 2px solid rgb(219, 219, 219);
-    border-radius: 5px;
-    min-height: 250px;
-    padding: 5px;
+    min-height: 200px;
     height: 100%;
 }
 .order_comments{

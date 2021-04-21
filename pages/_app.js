@@ -14,7 +14,9 @@ export default function App({ Component, pageProps }) {
       value={{
         revalidateOnFocus: true,
         refreshInterval: 0,
-        fetcher: (...args) => axios(...args).then(res => res?.data.data)
+        fetcher: (...args) => axios(...args)
+        .then(res => res?.data.data)
+        .catch(err => Promise.reject(err))
       }}
     >
     <GlobalStateProvider>

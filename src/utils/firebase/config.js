@@ -6,8 +6,7 @@ const firebaseConfig = {
     projectId: "nora-pack",
     storageBucket: "nora-pack.appspot.com",
     messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
-    appId: process.env.NEXT_PUBLIC_appId,
-    measurementId: "G-SSRLDZ6QHC"
+    appId: process.env.NEXT_PUBLIC_appId
   };
 
   if (!firebase.apps.length) {

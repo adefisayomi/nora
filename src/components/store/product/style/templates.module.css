@@ -82,7 +82,7 @@
 .order_form form {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 100%;
     min-height: inherit;
     height: 100%;

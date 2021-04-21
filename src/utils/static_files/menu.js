@@ -1,4 +1,48 @@
+import { GlobalState } from "../../context/globalState"
+import styles from './style/main_menu.module.css'
+import {Icon, Checkbox} from 'semantic-ui-react'
+import {useRouter} from 'next/router'
+import ProfileTab from '../../components/re-usables/profileTab'
+import Cart from "../../components/cart/cart"
+import DropDown from '../../components/re-usables/dropdown'
+import CartDropDown from '../../components/cart/cart_dropDown'
 
+
+
+export const MainMenu = () => {
+
+  const router = useRouter()
+  const {UI, user, toggleUI, logOut} = GlobalState()
+  const handleClick= (path) => {
+    router.push(`/${path}`)
+}
+ 
+  return(
+    <ul className= {styles.main_menu} style= {{ backgroundColor: UI.bgColor, color:UI.color }}>
+        {user && <li className= {styles.main_menu_list_hide} style= {{ borderBottom: UI.border}} onClick= {() => router.push(`/${user?._id}`)}>
+            <ProfileTab width= '30px' url= {user?.image?.url} username= {user?.username} id= {user?._id} />
+        </li>}
+        {user && <li className= {styles.main_menu_list_hide} style= {{ borderBottom: UI.border}}>
+            <DropDown list= {<CartDropDown />} width= '250px'>
+                <Cart />
+            </DropDown>
+          </li>}
+        {user && asideMenu && asideMenu.length > 0 && asideMenu.map((list, index) => (
+          <li key= {index} onClick= {() => handleClick(list.path)} className= {styles.main_menu_list_hide}>
+            {list.text}
+          </li>
+        ))}
+       {user ? 
+        <li style= {{ borderBottom: UI.border}} onClick= {logOut}>Logout</li> : 
+        <li style= {{ borderBottom: UI.border}} onClick= {() => router.push('/account/login')}>Login</li>
+        }
+      <li className= {styles.main_menu_theme} style= {{ borderBottom: UI.border}}>
+          <Checkbox toggle onChange= {toggleUI}/>
+          <h4>{UI?.dark ? 'Light Mode' : 'Dark Mode'}</h4>
+      </li>
+      </ul>
+  )
+}
 
 
 export const businessCategory = [
@@ -23,15 +67,9 @@ export const asideMenu =
         path: '/',
       },
       {
-        text: 'store',
-        value: 'store',
-        icon: 'cart',
-        path: '/store',
-      },
-      {
-        text: 'business',
-        value: 'business',
-        icon: 'shopping bag',
+        text: 'dashboard',
+        value: 'dashboard',
+        icon: 'dashboard',
         path: `/dashboard/store`,
       },
     ]

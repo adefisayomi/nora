@@ -1,6 +1,6 @@
 import Header from './header'
 import {useRouter} from 'next/router'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { GlobalState } from '../../context/globalState'
 import {GlobalAlert} from './alert'
 import Nav from '../nav/nav'
@@ -39,12 +39,11 @@ export default function Wrapper ({children}) {
             setGlobalAlert({message: res.data.message, type: res.data.success ? 'success' : 'error'})
         }
         return res
-        
     }, err => {
         return Promise.reject(err)
     })
-    //
     // 
+    
     useEffect(() => {
         toggleShowNav()
         redirect()
@@ -55,7 +54,7 @@ export default function Wrapper ({children}) {
             <Header title= {path} />
             <GlobalAlert />
             { showNav &&
-                <header style= {{ backgroundColor: UI.bgColor, color: UI.color, borderBottom: UI.border }}>
+                <header style= {{ backgroundColor: UI.bgColor, color: UI.color, borderBottom: !UI.dark && UI.border }}>
                     <Nav />
                 </header> 
             }

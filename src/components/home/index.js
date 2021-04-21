@@ -11,7 +11,6 @@ import { useEffect, useState } from 'react'
 export default function Home ({children}) {
 
     const {data: products} = useSWR(`/products`)
-    console.log(products)
       
     return(
         <Layout>

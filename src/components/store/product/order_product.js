@@ -7,11 +7,13 @@ import { useRouter } from "next/router";
 import { GlobalState } from "../../../context/globalState";
 import { Profile, CommentForm, OrderForm, Comments } from './templates';
 
+
 export default function View ({close, product}) {
 
     const router = useRouter()
     const {UI, user} = GlobalState()
     const [form, setForm] = useState({})
+    
 
 
     return(
@@ -23,18 +25,19 @@ export default function View ({close, product}) {
                     <div className= {styles.order_form}>
                         <Profile id= {product.author._id} title= {product.details.title} />
                         <Divider />
-                        <OrderForm props= {{ description: product.details.description, price: product.details.price }} />
+                        <OrderForm props= {product} />
                     </div>
                 </div>
-                <Divider />
-                
-                    { product && product.meta.comments.length > 0 && 
+                    { product && product.meta.comments.length > 0 &&
+                    <>
+                    <Divider />
                       <div className= {styles.order_comments}>
                          {product.meta.comments.map((com, index) => <Comments comment= {com} key= {index} product_id= {product._id}/> )}
                       </div>
+                      <Divider />
+                      </>
                     }
-                <Divider />
-                <CommentForm id= {product._id} />
+                {user && <CommentForm id= {product._id} />}
            </Modal>
     )
 }

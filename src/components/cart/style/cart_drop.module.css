@@ -1,0 +1,90 @@
+.cart_drop{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    max-height: 50vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+
+/* Cart cart_list */
+.cart_list{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px;
+    border-bottom: 0.5px solid rgb(218, 217, 217);
+}
+.cart_list_image{
+    display: flex;
+    width: 100%;
+    max-width: 70px;
+    margin-right: 5px;
+    height: 70px;
+    padding: 2px;
+    border: 1px solid rgb(219, 219, 219);
+}
+.cart_list_details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* width: 100%; */
+    flex: 1 1;
+}
+.cart_list_quantity{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: fit-content;
+}
+.cart_list_quantity input{
+    width: 100%;
+    max-width: fit-content;
+    font-size: 12px;
+    font-family: 'Roboto';
+}
+.cart_list_message{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin-bottom: 3px;
+}
+.cart_list_message > h4 {
+    margin: 0;
+    padding-bottom: 3px;
+    font-size: 13px;
+    font-family: 'Roboto';
+    font-weight: 500;
+}
+.cart_list_message > p {
+    margin: 0;
+    font-size: 11px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    color: teal;
+}
+.cart_list_delete{
+    display: flex;justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+}
+
+/* Empty cart */
+.empty_cart{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.empty_cart > p {
+    padding-top: 10px;
+    margin: 0;
+    font-size: 13px;
+    font-family: 'Roboto';
+    font-weight: 400;
+}

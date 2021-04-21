@@ -20,14 +20,14 @@ export default function Dashboard ({children}) {
                     Dashboard
                 </Label>
             </span>
-            <div className= {styles.dashboard_navigation} style= {{backgroundColor: UI.bgColor, border: UI.border, transform: nav && 'translateX(0%)' }}>
+            <div className= {styles.dashboard_navigation} style= {{backgroundColor: UI.bgColor, border: !UI.dark && UI.border, transform: nav && 'translateX(0%)' }}>
                 <ul>
                     {dashboardMenu.map((nav, index) => (
                         <Link key= {index} href= {nav.path}><li>{nav.text}</li></Link>
                     ))}
                 </ul>
             </div>
-            <div className= {styles.dashboard_main} style= {{backgroundColor: UI.bgColor, border: UI.border }}>
+            <div className= {styles.dashboard_main} style= {{backgroundColor: UI.bgColor, border: !UI.dark && UI.border }}>
                 {children}
             </div>
         </div>

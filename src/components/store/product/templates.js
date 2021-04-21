@@ -1,13 +1,11 @@
 import styles from './style/templates.module.css'
-import {Label, Header, Icon, Form, Input, Placeholder, Button, Comment} from 'semantic-ui-react'
+import {Label, Header, Icon, Form, Input, Placeholder, Button, Comment, Checkbox} from 'semantic-ui-react'
 import {useRouter} from 'next/router'
 import { GlobalState } from '../../../context/globalState'
 import {useEffect, useState} from 'react'
 import ProfileTab from '../../re-usables/profileTab'
 import axios from 'axios'
-import useSWR, { trigger } from 'swr'
-import moment from 'moment'
-
+import useSWR, { trigger, mutate } from 'swr'
 
 
 export const Profile = ({id, title}) => {
@@ -71,18 +69,18 @@ export const Action = ({onClick, meta}) => {
     return(
         <div className= {styles.action}>
             <span>
-                <Label circular basic style= {{ backgroundColor: UI.bgColor, color: UI.color }}>
+                <Label circular basic style= {{backgroundColor: UI.bgColor, color: UI.color, border: UI.border }}>
                     <Icon
                         name= 'send'
                         style= {{ fontSize:'16px' }}
                         fitted
                         link
-                        onClick= {onClick?.message}
+                        onClick= {onClick?.comment}
                     />
-                    <span style= {{ paddingLeft: '10px', fontSize: '10px', fontFamily: 'Roboto' }}>23</span>
+                    <span style= {{ paddingLeft: '10px', fontSize: '10px', fontFamily: 'Roboto' }}>{meta?.comments.length}</span>
                 </Label>
                 <span style= {{ padding: '0 10px' }}></span>
-                <Label circular basic style= {{ backgroundColor: UI.bgColor, color: UI.color }}>
+                <Label circular basic style= {{ backgroundColor: UI.bgColor, color: UI.color, border: UI.border }}>
                     <Icon
                         name= 'like'
                         style= {{ fontSize:'16px' }}
@@ -108,44 +106,69 @@ export const Action = ({onClick, meta}) => {
 }
 
 //
-
+// 
 export const OrderForm = ({props}) => {
 
-  const {UI} = GlobalState()
-  const [form, setForm] = useState({description: props.description, price: props.price})
-  const getForm = () => setForm({...form, [e.target.name]: e.target.value})
+  const {UI, user, cart} = GlobalState()
+  const [form, setForm] = useState({quantity: '', options: {}})
+  const getForm = (e) => setForm({...form, [e.target.name]: e.target.value})
+  const getOptions = (e) => setForm({...form, options: { ...form.options, [e.target.name]: e.target.value} })
   const [loading, setLoading] = useState(false)
-  const [note, setNote] = useState(true)
-  const toggleNote = () => setNote(!note)
 
-  const handleSubmit = () => {
+//   
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
     // 
+    mutate('/cart', [...cart, form], false)
+    await axios.post(`/cart/${props._id}`, form)
+    mutate('/cart')
+    mutate('/products')
+    setLoading(false)
   }
 
   return(
     <div className= {styles.order_form}>
      <Form>
-          <Label tag color= 'grey' style= {{ margin: '10px 0',  width: 'fit-content' }}>
-              ${form.price}
-          </Label>
+            {props?.details?.quantity > 0 &&
+             <span>
+                Only {props.details.quantity} left.
+            </span>}
+           <Label tag color= 'grey' style= {{ margin: '10px 0',  width: 'fit-content' }}>
+              ${props.details.price}
+           </Label>
           <Form.Field>
               <label style= {{ color: 'teal' }}>Description</label>
-              <p>{form.description}</p>
+              <p>{props.details.description}</p>
           </Form.Field>
           <Form.Group inline widths= 'equal'>
               <label style= {{ color: 'teal' }} >Quantity</label>
               <Input
                   placeholder= '1'
+                  name= 'quantity'
                   type= 'number'
                   min= '1'
+                  onChange= {getForm}
+                  value= {form.quantity || ''}
               />
           </Form.Group>
-          <span style= {{ padding: '5px 0' }}></span>
+          <Form.Field>
+              <label htmlFor="textarea" style= {{ color: 'teal' }}>Add Note</label>
+              <Form.TextArea
+                placeholder= 'Short note'
+                style= {{ minHeight: '80px' }}
+                value= {form.options.note || ''}
+                name= 'note'
+                onChange= {getOptions}
+              />
+          </Form.Field>
           <Button
               icon= {{ name: 'cart' }}
-              content= 'Add to cart'
+              content= {`Add to cart`}
               color= 'teal'
+              disabled= {props.hidden}
+              onClick= {handleSubmit}
+              loading= {loading}
               basic= {UI.dark ? true : false}
               style= {{ borderRadius: '0', width: 'fit-content'}}
           />
@@ -155,9 +178,9 @@ export const OrderForm = ({props}) => {
 }
 
 
-export const CommentForm = ({id}) => {
+export const CommentForm = ({id, randomClick= () => ''}) => {
 
-    const {UI,user} = GlobalState()
+    const {UI, user} = GlobalState()
     const [form, setForm] = useState({comment: ''})
     const resetForm = () => setForm({comment: ''})
     const [loading, setLoading] = useState(false)
@@ -165,17 +188,19 @@ export const CommentForm = ({id}) => {
     // 
     const handleComment = async () => {
         if(user) {
+            randomClick()
             setLoading(true)
+            mutate()
             await axios.post(`/comment/${id}`, form)
             resetForm()
-            trigger('/products')
+            mutate('/products')
             setLoading(false)
         }
     }
 
   return(
     <div className= {styles.comment} style= {{ backgroundColor: UI.bgColor }}>
-        <ProfileTab width= '30px' url= {user.image.url} username= {user.username} id= {user._id}/>
+        <ProfileTab width= '30px' url= {user?.image?.url} username= {user?.username} id= {user?._id}/>
         <textarea
           name= 'comment'
           onChange= {getForm}
@@ -215,7 +240,7 @@ export const Comments = ({comment, product_id}) => {
                 <Comment.Content>
                     <Comment.Author as='a' style= {{ color: UI.color }}>{data.username || data.first_name}</Comment.Author>
                     <Comment.Metadata>
-                    <span style= {{ color: 'teal', fontFamily: 'Roboto', fontSize: '10px'  }}>{moment().startOf('hour').fromNow(comment.date)}</span>
+                    <span style= {{ color: 'teal', fontFamily: 'Roboto', fontSize: '10px'  }}>{comment.date}</span>
                     </Comment.Metadata>
                     <Comment.Text style= {{ color: UI.color }}>{comment.body?.comment}</Comment.Text>
                     <Comment.Actions>
