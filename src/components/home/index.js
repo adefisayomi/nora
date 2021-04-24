@@ -1,14 +1,10 @@
 import styles from './style/home.module.css'
 import Layout from '../wrapper/layout'
-import Product from '../store/product/'
-import { GlobalState } from '../../context/globalState'
-import axios from 'axios'
-import useSWR, { mutate, trigger } from 'swr'
-import { useEffect, useState } from 'react'
+import Product from '../store/product/product'
+import useSWR from 'swr'
 
 
-
-export default function Home ({children}) {
+export default function Home () {
 
     const {data: products} = useSWR(`/products`)
       
@@ -16,7 +12,7 @@ export default function Home ({children}) {
         <Layout>
             <div className= {styles.home} >
                 {products && products.map((product, index) => (
-                    <Product key= {index} props= {product} />
+                    <Product key= {index} product= {product} />
                 ))}
             </div>
         </Layout>

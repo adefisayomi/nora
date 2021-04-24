@@ -6,33 +6,25 @@ import { ProfileTab } from './profileTab'
 import { useEffect, useState } from 'react'
 
 
-export default function Header ({data}) {
+const Header = (({user}) => {
 
     const router = useRouter()
-    const {UI, user} = GlobalState()
-    const [restrict, setRestrict] = useState(false)
-    // 
-    useEffect(() => {
-        if(user && user._id == data?._id) {
-            setRestrict(true)
-        } 
-        else setRestrict(false)
-    }, [data])
+    const {UI} = GlobalState()
 
     return(
         <div className= {styles.header} style= {{ backgroundColor: UI.bgColor, color: UI.color }} >
-            {data && 
+            {user && 
                 <>
                     <span>
-                    <ProfileTab width= '100px' user= {data} />
+                    <ProfileTab width= '100px' user= {user} />
                     </span>
                     <span className= {styles.header_profile}>
                         <div className= {styles.header_details}>
-                            <h1>@{data?.username || '' }</h1>
-                            <h2>{(data?.first_name || '') + ' ' + (data?.other_name[0] || '')}</h2>
+                            <h1>@{user?.username || '' }</h1>
+                            <h2>{(user?.first_name || '')}</h2>
                         </div>
                         <div className= {styles.header_button}>
-                            { data.authorized &&
+                            { user.authorized &&
                                 <Button
                                     content= 'Edit Profile'
                                     color= 'teal'
@@ -51,4 +43,6 @@ export default function Header ({data}) {
             }
         </div>
     )
-}
+})
+
+export default Header

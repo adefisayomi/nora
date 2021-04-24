@@ -1,6 +1,6 @@
 import styles from './style/edit.module.css'
-import {Form, Button, Input, Icon, Checkbox, Label} from 'semantic-ui-react'
-import { useState, useEffect, useCallback } from 'react'
+import {Form, Button, Input, Icon} from 'semantic-ui-react'
+import { useState, useCallback } from 'react'
 import {GlobalState} from '../../context/globalState'
 import axios from 'axios'
 import { trigger } from 'swr'
@@ -11,7 +11,6 @@ import {useRouter} from 'next/router'
 import User from './'
 import Modal from '../re-usables/modal'
 import Redirect from '../re-usables/redirect'
-import RenderPage from '../re-usables/renderPage'
 import UploadProfilePicture from '../re-usables/UploadProfilePicture'
 
 
@@ -19,20 +18,10 @@ export default function EditProfile () {
     
     const {user, UI, setGlobalAlert} = GlobalState()
     const router = useRouter()
-    const [form, setForm] = useState({})
+    const [form, setForm] = useState(user)
     const getForm = useCallback( e => setForm({...form, [e.target.name]: e.target.value}) )
     const [loading, setLoading] = useState(false)
     const getGender = (e, {value}) => setForm({...form, gender: value})
-    // 
-    useEffect(() => {
-        const getUser = async () => {
-            if(user) {
-                await setForm(RenderPage(user))
-            }
-        }
-        getUser()
-    }, [router.query.user])
-    // 
     // 
     const [imageUpload, setImageUpload] = useState(true)
     const [image, setImage] = useState({file: '', preview: ''})
@@ -107,7 +96,7 @@ export default function EditProfile () {
                                         placeholder= 'First name'
                                         name= 'first_name'
                                         type= 'text'
-                                        value= { form.first_name ? form?.first_name : '' }
+                                        value= { form.first_name || '' }
                                         onChange= {getForm}
                                     /> 
                                 </Form.Field>
@@ -117,7 +106,7 @@ export default function EditProfile () {
                                         placeholder= 'Other names'
                                         name= 'other_name'
                                         type= 'text'
-                                        value= { form.other_name ? form.other_name : '' }
+                                        value= { form.other_name || '' }
                                         onChange= {getForm}
                                     />
                                 </Form.Field>

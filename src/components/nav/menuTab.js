@@ -5,7 +5,7 @@ import {Icon} from 'semantic-ui-react'
 import {MainMenu} from '../../utils/static_files/menu'
 import { GlobalState } from '../../context/globalState'
 import ProfileTab from '../re-usables/profileTab'
-import Cart from '../cart/cart'
+import Cart from '../cart/cartTab'
 import DropDown from '../re-usables/dropdown'
 import CartDropDown from '../cart/cart_dropDown'
 

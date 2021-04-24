@@ -1,21 +1,18 @@
 .modal{
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    max-width: 650px;
+    max-width: 620px;
     padding: 10px;
-    margin: 10px;
 }
-.modal_loader{
-    padding: 20px 0;
+.modal_header{
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding: 5px;
 }
-.modal_content{
-    font-family: 'Roboto';
-    font-weight: 400;
-    margin: 0;
-    padding: 0;
-    text-transform: capitalize;
-    font-size: 12px;
+@media screen and (max-width: 550px) {
+.modal{
+    padding: 5px;
+}
 }

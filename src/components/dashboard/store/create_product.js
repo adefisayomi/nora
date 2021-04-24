@@ -69,7 +69,7 @@ export default function Create () {
 
     return(
        <Store>
-           <Modal >
+           <Modal width= '600px' >
             <div className= {styles.create}>
                 <UploadImage onChange= {getImage} onDelete= {deleteImage} images= {images} />
                 <Form>

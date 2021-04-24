@@ -11,6 +11,7 @@ export default function loader ({title}) {
         <div className= {styles.loader} style= {{ color: UI.color, backgroundColor: UI.bgColor }}>
             <Loader 
                 active 
+                indeterminate
                 size= 'small' 
                 inverted= {UI.dark ? true : false}
                 content= {title}

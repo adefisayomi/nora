@@ -1,4 +1,5 @@
-import { useContext, createContext, useState, useCallback, useReducer} from "react";
+import axios from "axios";
+import { useContext, createContext, useState, useCallback, useReducer, useEffect} from "react";
 import useSWR from "swr";
 import {themeObject, themeReducer} from './reducers/theme'
 import {signInWithToken, logOut} from './reducers/user'
@@ -22,9 +23,8 @@ const GlobalStateProvider =  ({children}) => {
     // 
     const {data: user} = useSWR('/user')
     const {data: business} = useSWR( () => user ? `/business/${user._id}` : null, {revalidateOnMount: true})
-    const {data: products} = useSWR(() => user ? `/products/${user._id}` : null, {revalidateOnMount: true})
+    const {data: products} = useSWR( () => user ? `/products/${user._id}` : null, { initialData: [], revalidateOnMount: true})
     const {data: cart} = useSWR( () => user ? '/cart' : null, {revalidateOnMount: true})
-    // 
     // 
     // 
     return(

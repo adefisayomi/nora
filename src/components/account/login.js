@@ -28,10 +28,12 @@ const Login = () => {
         setLoading(true)
         //
         try{
-            const res = await axios.post('/user/login', form)
-            await signInWithToken(res.data.data)
-            resetForm()
-            return setLoading(false)
+            const token = await axios.post('/user/login', form)
+            const res = await signInWithToken(token.data.data)
+            if(res && res.data?.success) {
+                resetForm()
+                return setLoading(false)
+            } return 
         }
         catch(err) {
             return setLoading(false)

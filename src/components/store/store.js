@@ -1,11 +1,11 @@
 import styles from './style/store.module.css'
-import Layout from '../wrapper/layout'
 import Filter from '../re-usables/filter'
 import { Divider, Icon } from 'semantic-ui-react'
 import { GlobalState } from '../../context/globalState'
 import Gallery from '../re-usables/gallery'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
+import Empty from '../re-usables/empty'
 import Loader from '../re-usables/loader'
 
 
@@ -16,8 +16,9 @@ export default function Store () {
     const {UI} = GlobalState()
 
     return(
-        <Layout>
-          {products ? <div className= {styles.store} style= {{ backgroundColor: UI.bgColor, color: UI.color }}>
+        <div className= {styles.store} style= {{ border: !UI.dark && UI.border, backgroundColor: UI.bgColor, color: UI.color  }}>
+          {products ? 
+            <>
                <Icon
                     name= 'arrow alternate circle left outline'
                     size= 'large'
@@ -27,11 +28,11 @@ export default function Store () {
               <Divider />
               <Filter />
               <Divider />
-              <Gallery slides= {products} />
-           </div> : 
+              { products.length > 0 ? <Gallery slides= {products} /> : <Empty content= {{ text: 'Your store is empty.', icon: 'cart' }} /> }
+           </> : 
             <Loader title= 'Loading Store' />
            }
-        </Layout>
+        </div>
         
     )
 }

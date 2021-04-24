@@ -8,7 +8,7 @@
 }
 .image_gallery_div {
     display: flex;
-    padding: 5px;
+    padding: 4px;
     height: 230px;
     transition: 0.3s;
     width: calc(100%/3);
@@ -25,8 +25,9 @@
 }
 @media screen and (max-width: 700px) {
     .image_gallery_div {
-        width: calc(100%/3);
-        height: 180px;
+        width: calc(100%/2);
+        height: 250px;
+        padding: 3px;
         transition: 0.3s;
     }
 }
@@ -35,7 +36,7 @@
         width: calc(100%/2);
         height: 200px;
         transition: 0.3s;
-        padding: 4px;
+        padding: 2px;
     }
 }
 @media screen and (max-width: 450px) {
@@ -56,15 +57,15 @@
 }
 .gallery_div {
     display: flex;
-    padding: 5px;
-    height: 250px;
+    padding: 4px;
+    height: 270px;
     transition: 0.3s;
-    width: calc(33%);
+    width: calc(100%/3);
     position: relative;
 }
 .gellery_span {
+    display: flex;
     width: 100%;
-    border: 0.5px solid rgb(133, 133, 133);
 }
 .gallery_span_overlay{
     display: none;
@@ -73,7 +74,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 5px;
+    padding: 4px;
 }
 .gallery_span_overlay > span {
     background-color: rgba(0, 0, 0, 0.24);
@@ -87,22 +88,23 @@
 }
 @media screen and (max-width: 800px) {
     .gallery_div {
-        height: 220px;
+        height: 250px;
         transition: 0.3s;
     }
 }
 @media screen and (max-width: 700px) {
     .gallery_div {
-        height: 180px;
+        width: calc(100%/2);
+        height: 250px;
         transition: 0.3s;
     }
 }
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
     .gallery_div {
         width: calc(100%/2);
-        height: 200px;
+        height: 220px;
         transition: 0.3s;
-        padding: 4px;
+        padding: 2px;
     }
 }
 @media screen and (max-width: 450px) {

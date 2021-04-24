@@ -2,10 +2,9 @@ import styles from './style/user.module.css'
 import Layout from '../wrapper/layout'
 import Header from './header'
 import { GlobalState } from '../../context/globalState'
-import Filter from '../re-usables/filter'
-import Gallery, {ImageGallery} from '../re-usables/gallery'
+import  {ImageGallery} from '../re-usables/gallery'
 import { Divider } from 'semantic-ui-react'
-import { useCallback, useEffect, useState } from 'react'
+import Empty from '../re-usables/empty'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import Loader from '../re-usables/loader'
@@ -14,49 +13,32 @@ import EmptyUser from '../re-usables/emptyUser'
 
 export default function User ({children}) {
 
-    // Get data
     const router = useRouter()
     const {UI, user, products} = GlobalState()
-    const [refetchUser, setRefetchUser] = useState(false)
+    const {data: currentUser} = useSWR(() => router.query?.user !== user?.username || router.query?.user !== user?._id ? 
+    `/user/${router.query.user}` : '', {initialData: user, revalidateOnMount: true})
     // 
-    useEffect(() => {
-        if(router.query.user == user?.username) {
-            setRefetchUser(false)
-        }
-        else setRefetchUser(true)
-    }, [user, router.query.user])
-    //
-    const {data} = useSWR(() => refetchUser && `/user/${router.query.user}`, {initialData: user, revalidateOnMount: true})
-    // 
-    const {data: userProducts} = useSWR(() => refetchUser && `/products/${router.query.user}`, {initialData: products, revalidateOnMount: true})
-    //
-    const [images, setImages] = useState([])
-    useEffect(() => {
-        if(userProducts) {
-            const prods = userProducts.map(prod => prod.details.images)
-            const prodImages = prods.reduce((a, b) => a.concat(b), []);
-            setImages(prodImages)
-        }
-    }, [userProducts])
-    
+    const {data: currenUserProducts} = useSWR(() => router.query?.user !== user?.username || router.query?.user !== user?._id ?  `/products/${router.query.user}` : '', {initialData: products, revalidateOnMount: true})
+    // Get products and parse them into individual images
+    let photos = currenUserProducts?.map(prod => prod.details.images).reduce((a, b) => a.concat(b), [])
 
     return(
         <Layout>
-            <div className= {styles.user} style= {{ backgroundColor: UI.bgColor, color: UI.color }}>
-                { data ? 
+            <div className= {styles.user} style= {{ backgroundColor: UI.bgColor, color: UI.color, border: !UI.dark && UI.border }}>
+                { currentUser ? 
                   <>
                     <div className= {styles.user_header}>
-                        <Header data= {data} />
+                        <Header user= {currentUser} />
                     </div>
                     <div className= {styles.user_main}>
                         <Divider  />
-                        <ImageGallery images= {images} />
+                        {photos.length > 0 ? <ImageGallery images= {photos} /> : <Empty content= {{ text: 'You currently have no upload.', icon: 'image' }} /> }
                     </div>
                   </> :
-                  data == null ?
-                  <EmptyUser content= 'User not found' />
+                  currentUser == undefined ?
+                  <Loader title = 'User Profile' />
                     :
-                    <Loader title= 'User Profile' />
+                 <EmptyUser content= 'User not found' />
                 }
                 {children}
             </div>

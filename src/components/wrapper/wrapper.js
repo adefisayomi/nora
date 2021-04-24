@@ -30,10 +30,14 @@ export default function Wrapper ({children}) {
     }
     // 
     // Axios defaults
-    axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? 'http://localhost:5000/api' : 'https://rango-server.herokuapp.com/api'
+    axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? 'http://localhost:5000/api' : 'https://server.devbyclace.com/api'
     axios.defaults.headers['Content-Type'] = 'application/json'
     axios.defaults.withCredentials = true
     // 
+    // block request
+    // axios.interceptors.request.use(req => {
+    //     // Promise.reject(req)
+    // })
     axios.interceptors.response.use(res => {
         if(res && res.data.message !== null) {
             setGlobalAlert({message: res.data.message, type: res.data.success ? 'success' : 'error'})

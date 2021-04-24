@@ -104,7 +104,7 @@ export default function EditBusiness () {
   
     return(
       <Business>
-        <Modal maxWidth= '500px'>
+        <Modal width= '550px'>
           {bankRef && !deleting ?
           <div className= {styles.create_business}>
             <Form>

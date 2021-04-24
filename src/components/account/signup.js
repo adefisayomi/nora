@@ -27,10 +27,12 @@ const Signup = () => {
         setLoading(true)
         //
         try{
-            const res = await axios.post('/user/signup', form)
-            await signInWithToken(res.data.data)
-            setLoading(false)
-            return setForm({})
+            const token = await axios.post('/user/signup', form)
+            const res = await signInWithToken(token.data.data)
+            if(res && res.data?.success) {
+                resetForm()
+                return setLoading(false)
+            } return setLoading(false)
         }
         catch(err) {
             return setLoading(false)

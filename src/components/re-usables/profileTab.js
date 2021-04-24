@@ -18,7 +18,7 @@ export default function ProfileTab ({width= '33px', url, id, username}) {
                     <img src= {url} alt="profile-picture"/>
                 </span> :
                 <span>
-                    <h1> { username && user.username[0] || '' } </h1>
+                    <h1> { username && username[0] || '' } </h1>
                 </span>
             }
         </div>

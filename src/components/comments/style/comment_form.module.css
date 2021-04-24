@@ -1,0 +1,16 @@
+.comment_form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}
+.comment_form > textarea{
+    flex: 1 1;
+    resize: none;
+    border-radius: 5px;
+    padding: 10px;
+    outline: none;
+    margin: 0 5px;
+    font-size: 12px;
+    overflow-y: hidden;
+}

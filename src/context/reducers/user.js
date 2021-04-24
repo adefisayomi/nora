@@ -11,7 +11,7 @@ export async function logOut () {
 export async function signInWithToken (token) {
     const res = await axios.get('/user', {headers: { authorization: `Bearer ${token}` }})
     if(res && res.data.success) {
-        trigger('/user')
+        mutate('/user')
         return res.data.data
     }
     return 

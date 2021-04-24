@@ -95,7 +95,7 @@ export default function Create () {
 
     return(
        <Store>
-           <Modal loading= {product ? false : true} content= 'Loading Product...' >
+           <Modal content= 'Loading Product...' >
             { product && <div className= {styles.create}>
                 <UploadImage onChange= {getImage} onDelete= {deleteImage} images= {images} />
                 <Form>

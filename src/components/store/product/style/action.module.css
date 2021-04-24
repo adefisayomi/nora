@@ -1,0 +1,13 @@
+.action{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.action_button {
+    padding-left: 5px;
+    font-size: 9px;
+    font-family: 'Roboto';
+    color: grey;
+    cursor: default;
+}

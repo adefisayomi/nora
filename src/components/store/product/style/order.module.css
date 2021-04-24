@@ -1,38 +1,59 @@
 .order{
     width: 100%;
-    position: relative;
+    max-height: fit-content;
     display: flex;
     align-items: center;
-    padding: 10px;
-}
-.order_form{
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-between; */
-    width: 50%;
-    padding-left: 10px;
-    height: 100%;
-    min-height: 280px;
+    position: relative;
+    border-radius: 0;
 }
 .order_images {
+    display: flex;
+    width: 50%;
+    position: relative;
+    min-height: 200px;
+    height: auto;
+    max-height: 300px;
+}
+.order_form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
     width: 50%;
     min-height: 200px;
-    height: 100%;
+    height: auto;
+}
+.order_divider{
+    width: 0.5px;
+    background-color: rgb(190, 190, 190);
+    height: 250px;
+    margin: 0 5px;
 }
 .order_comments{
     width: 100%;
-    max-height: 400px;
+    max-height: 200px;
     overflow-y: auto;
 }
-@media screen and (max-width: 550px){
+.order_comment_count{
+    cursor: pointer;
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+@media screen and (max-width: 700px) {
     .order{
         flex-direction: column;
     }
-    .order_form{
-        width: 100%;
-        padding-top: 10px;
-    }
     .order_images{
         width: 100%;
+        max-height: 350px;
+    }
+    .order_form{
+        width: 100%;
+    }
+    .order_divider{
+        width: 100%;
+        background-color: rgb(190, 190, 190);
+        height: 0.5px;
+        margin: 10px 0 ;
     }
 }

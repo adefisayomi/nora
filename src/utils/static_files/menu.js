@@ -3,7 +3,7 @@ import styles from './style/main_menu.module.css'
 import {Icon, Checkbox} from 'semantic-ui-react'
 import {useRouter} from 'next/router'
 import ProfileTab from '../../components/re-usables/profileTab'
-import Cart from "../../components/cart/cart"
+import Cart from "../../components/cart/cartTab"
 import DropDown from '../../components/re-usables/dropdown'
 import CartDropDown from '../../components/cart/cart_dropDown'
 

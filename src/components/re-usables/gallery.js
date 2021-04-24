@@ -15,17 +15,17 @@ const Gallery = memo(({slides}) => {
         <div className= {styles.gallery}>
             {slides && slides.map((slide, index) => (
                <div key= {index} className= {styles.gallery_div}>
-                   <span className= {styles.gellery_span} style= {{ border: UI.border }}>
+                   <span className= {styles.gellery_span}>
                        <Slider images= {slide.details.images} />
                    </span>
                    <span className= {styles.gallery_span_overlay}>
-                       <span>
-                           <Label as= 'a' tag color= 'black' onClick= {() => router.push(`${router.asPath}/${slide._id}`)}>
+                       <span onClick= {() => router.push(`${router.asPath}/${slide._id}`)}>
+                            <Label as= 'a' tag color= 'black'>
                                 ${slide.details?.price}
-                        </Label>
+                            </Label>
                        </span>
                    </span>
-                </div> 
+                </div>
             ))}
         </div>
     )
@@ -33,7 +33,7 @@ const Gallery = memo(({slides}) => {
 
 export default Gallery
 
-export const ImageGallery = ({images}) => {
+export const ImageGallery = memo(({images}) => {
 
     const {UI} = GlobalState()
 
@@ -46,4 +46,4 @@ export const ImageGallery = ({images}) => {
             ))}
         </div>
     )
-}
+})

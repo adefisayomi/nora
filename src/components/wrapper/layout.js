@@ -9,8 +9,8 @@ const Layout = memo(({children}) => {
     const {UI} = GlobalState()
 
     return(
-        <div className= {styles.layout}>
-            <div className= {styles.layout_main}>
+        <div className= {styles.layout} >
+            <div className= {styles.layout_main} >
                 {children}
             </div>
             <div className= {styles.layout_notification}>

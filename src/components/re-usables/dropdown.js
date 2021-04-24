@@ -2,7 +2,6 @@ import styles from './style/drop_down.module.css'
 import {Icon, Transition} from 'semantic-ui-react'
 import { useState } from 'react'
 import { GlobalState } from '../../context/globalState'
-import { useRouter } from 'next/router'
 
 
 export default function DropDown ({width, list, children, animation= {overlay: 'fade', menu: 'scale'} }) {

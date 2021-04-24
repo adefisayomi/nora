@@ -3,7 +3,6 @@ import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import useSWR from 'swr'
 import { GlobalState } from '../../context/globalState';
 
 
@@ -19,7 +18,7 @@ const StyledBadge = withStyles((theme) => ({
 
 const Cart = memo(() => {
 
-    const {user, UI, cart} = GlobalState()
+    const { UI, cart} = GlobalState()
     
   return (
       <div >

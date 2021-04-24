@@ -1,17 +1,31 @@
 .view{
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 20px;
-}
-.view_action_button{
-    display: flex;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
+    position: relative;
 }
-@media screen and (max-width: 500px) {
+.view_gallery{
+    display: flex;
+    width: 50%;
+    min-height: 250px;
+    max-height: 330px;
+}
+.view_details{
+    display: flex;
+    width: 50%;
+}
+@media screen and (max-width: 650px) {
     .view{
-        padding: 10px;
+        flex-direction: column;
+    }
+    .view_gallery{
+        display: flex;
+        width: 100%;
+        min-height: 250px;
+        max-height: 450px;
+    }
+    .view_details{
+        margin-top: 20px;
+        width: 100%;
     }
 }

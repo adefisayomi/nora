@@ -1,8 +1,6 @@
 import styles from './style/notification.module.css'
-import {v4 as uuid} from 'uuid'
 import { memo, useEffect, useState } from 'react'
 import { GlobalState } from '../../context/globalState'
-import moment from 'moment'
 
 
 export default function Notification () {
@@ -26,7 +24,7 @@ export default function Notification () {
             <h1 style= {{ borderBottom: UI.border }}>Notification</h1>
             <div className= {styles.notification_body} >
                 {notification && notification.length > 0 && notification.map((not, index) => (
-                  <List key= {index} message= {not} time= {moment().startOf('hour').fromNow()} />  
+                  <List key= {index} message= {not} time= {new Date().toDateString()} />  
                 ))}
             
             </div>

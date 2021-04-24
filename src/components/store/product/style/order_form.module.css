@@ -1,0 +1,72 @@
+.order_form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+.order_form > h1 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+    text-transform: capitalize;
+    font-weight: 500;
+    color: teal;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.order_form > textarea {
+    resize: none;
+    width: 100%;
+    padding: 5px;
+    outline: none;
+    margin-bottom: 10px;
+    font-size: 12px;
+    overflow-y: hidden;
+}
+.order_form_description{
+    display: flex;
+    align-items: center;
+}
+.order_form_description > h4 {
+    color: teal;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 12.5px;
+    margin-right: 5px;
+}
+.order_form > p {
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 11.5px;
+}
+.order_form_options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.order_form_options > span {
+    width: calc(100%/3);
+    display: flex;
+    flex-direction: column;
+    padding: 0 5px;
+}
+.order_form_options > span > input {
+    color: inherit;
+}
+.order_form_options > span > label {
+    color: teal;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 5px;
+    font-family: 'Roboto';
+    text-transform: capitalize;
+    font-weight: 700;
+    font-size: 12px;
+}

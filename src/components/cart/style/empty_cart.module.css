@@ -1,0 +1,15 @@
+.empty_cart{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+}
+.empty_cart > p {
+    padding-top: 10px;
+    margin: 0;
+    font-size: 13px;
+    font-family: 'Roboto';
+    font-weight: 400;
+}
