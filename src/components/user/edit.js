@@ -18,7 +18,7 @@ export default function EditProfile () {
     
     const {user, UI, setGlobalAlert} = GlobalState()
     const router = useRouter()
-    const [form, setForm] = useState(user)
+    const [form, setForm] = useState({...user, social_media: []})
     const getForm = useCallback( e => setForm({...form, [e.target.name]: e.target.value}) )
     const [loading, setLoading] = useState(false)
     const getGender = (e, {value}) => setForm({...form, gender: value})
