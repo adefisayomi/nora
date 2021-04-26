@@ -46,7 +46,7 @@ const OrderForm = memo(({props}) => {
                         <Input
                             name= 'quantity'
                             transparent= {UI.dark ? true : false}
-                            style= {{ backgroundColor: UI.dark && UI.body, color: UI.color, padding: UI.dark && '10px', borderRadius: UI.dark && '3px' }}
+                            style= {{outline: 'none',  backgroundColor: UI.dark && UI.body, color: UI.color, padding: UI.dark && '10px', borderRadius: UI.dark && '3px' }}
                             inverted= {UI.dark ? true : false}
                             min= '1'
                             type= 'number'
@@ -88,7 +88,7 @@ const OrderForm = memo(({props}) => {
                     <TextArea 
                         placeholder= 'Add note...'
                         name= 'note'
-                        style= {{ backgroundColor: UI.dark && UI.body, color: UI.color, border: UI.dark && UI.body }}
+                        style= {{ backgroundColor: UI.dark && UI.body, color: UI.color, border: !UI.dark && UI.border }}
                         value= {form?.options?.note}
                         onChange= {getForm}
                 />

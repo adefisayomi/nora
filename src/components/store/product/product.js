@@ -8,6 +8,7 @@ import Order from './order'
 import {Label} from 'semantic-ui-react'
 import CommentForm from '../../comments/commentForm'
 import ProductHeader from './productHeader'
+import ProductCaption from './productCaption'
 
 const Product = memo(({product}) => {
 
@@ -31,6 +32,8 @@ const Product = memo(({product}) => {
             </Label>}
                 <Slider images= {product.details.images} />
             </div>
+            <Divider fitted />
+            <ProductCaption product= {product} />
             <Divider fitted />
             <Action product_id= {product._id} onClick= {{cart: placeOrder, comment: toggleComment}} />
             {user && comment && <>

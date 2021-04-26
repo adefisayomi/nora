@@ -43,19 +43,22 @@ const Login = () => {
     return(
 
         <div className= {styles.login} style= {{ color: UI.color }}>
-            <div style= {{ backgroundColor: UI.bgColor, border: UI.border }} className= {styles.login_container}>
+            <div style= {{ backgroundColor: UI.bgColor, border: !UI.dark && UI.border }} className= {styles.login_container}>
                 <span className= {styles.login_logo}>
                     <LogoTab show />
                 </span>
                 <div className= {styles.login_options}>
                     <Form className= {styles.login_google} style= {{ transform: useGoogle && `translateX(0%)`, position: !useGoogle && 'absolute' }}>
-                        <GoogleButton path= {'/user/usegoogle/login'} content= {'Continue with Google'} />
+                        <GoogleButton path= {'/user/google/login'} content= {'Continue with Google'} />
                     </Form>
 
-                    <Form className= {styles.login_username} style= {{ transform: !useGoogle && `translateX(0%)`, position: useGoogle && 'absolute' }} onSubmit= {handleSubmit}>
+                    <Form className= {styles.login_username} style= {{ transform: !useGoogle && `translateX(0%)`, position: useGoogle && 'absolute', color: UI.color }} onSubmit= {handleSubmit}>
                         <Form.Input
                             placeholder= 'Username, email or Phone'
                             name= 'username'
+                            transparent= {UI.dark ? true : false}
+                            inverted= {UI.dark ? true : false}
+                            style= {{outline: 'none', backgroundColor: UI.dark && UI.body, color: UI.color, padding: UI.dark && '10px', borderRadius: UI.dark && '3px' }}
                             type= 'text'
                             value= {form.username}
                             onChange= {getForm}
@@ -63,8 +66,11 @@ const Login = () => {
                         <Form.Input
                             placeholder= 'Password'
                             name= 'password'
+                            transparent= {UI.dark ? true : false}
+                            inverted= {UI.dark ? true : false}
+                            style= {{outline: 'none', backgroundColor: UI.dark && UI.body, color: UI.color, padding: UI.dark && '10px', borderRadius: UI.dark && '3px' }}
                             type= {showPass ? 'text' : 'password'}
-                            icon= {{name: showPass ? 'eye' : 'eye slash', link: true, onClick: togglePass}}
+                            icon= {{name: showPass ? 'eye' : 'eye slash', link: true, onClick: togglePass, circular: UI.dark && true}}
                             value= {form.password}
                             onChange= {getForm}
                         />

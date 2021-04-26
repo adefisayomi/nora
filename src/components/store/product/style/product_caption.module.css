@@ -1,0 +1,29 @@
+.caption{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 8px;
+}
+.caption_user {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+}
+.caption_user > h1 {
+    font-weight: 500;
+    font-family: 'Roboto';
+    font-size: 12px;
+    text-transform: capitalize;
+    margin: 0;
+    padding: 0;
+    color: teal;
+    padding-right: 10px;
+}
+.caption_user > p {
+    font-weight: 500;
+    font-family: 'Roboto';
+    font-size: 11px;
+    text-transform: capitalize;
+    margin: 0;
+    padding: 0;
+}

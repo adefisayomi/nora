@@ -25,7 +25,7 @@ const Action = memo(({onClick, product_id}) => {
                         name= 'send'
                         style= {{ fontSize:'16px' }}
                         fitted
-                        circular
+                        // circular
                         link
                         onClick= {onClick?.comment}
                     />
@@ -37,7 +37,7 @@ const Action = memo(({onClick, product_id}) => {
                         style= {{ fontSize:'16px' }}
                         fitted
                         color= 'teal'
-                        circular
+                        // circular
                         link
                         onClick= {handleLike}
                     />
@@ -47,7 +47,7 @@ const Action = memo(({onClick, product_id}) => {
             <span>
                 <Icon 
                     name= 'cart'
-                    circular
+                    // circular
                     color=  {UI.dark ? 'teal' : 'black'}
                     link
                     onClick= {onClick?.cart}

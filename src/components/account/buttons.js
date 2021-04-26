@@ -19,6 +19,7 @@ export const GoogleButton = memo(({path, content}) => {
             const data = await firebase.auth().signInWithPopup(Provider)
             if(data.user) {
             //
+            console.log(data.user)
             const res = await axios.post(path, {token: data.user.za})
             await signInWithToken(res.data.data)
             return setLoading(false)  

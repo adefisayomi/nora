@@ -3,7 +3,6 @@ import { Button} from 'semantic-ui-react'
 import { GlobalState } from '../../context/globalState'
 import {useRouter} from 'next/router'
 import { ProfileTab } from './profileTab'
-import { useEffect, useState } from 'react'
 
 
 const Header = (({user}) => {

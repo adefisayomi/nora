@@ -37,6 +37,8 @@
 .order_comment_count{
     cursor: pointer;
     margin-bottom: 10px;
+    font-weight: 700;
+    color: teal;
     padding-top: 10px;
 }
 @media screen and (max-width: 700px) {

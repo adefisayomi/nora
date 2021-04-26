@@ -46,7 +46,7 @@ const DetailsForm = memo(({product}) => {
                             name= 'quantity'
                             min= '1'
                             transparent= {UI.dark ? true : false}
-                            style= {{ backgroundColor: UI.dark && UI.body, color: UI.color, padding: UI.dark && '10px', borderRadius: UI.dark && '3px' }}
+                            style= {{outline: 'none',  backgroundColor: UI.dark && UI.body, color: UI.color, padding: UI.dark && '10px', borderRadius: UI.dark && '3px' }}
                             type= 'number'
                             inverted= {UI.dark ? true : false}
                             onChange= {getForm}

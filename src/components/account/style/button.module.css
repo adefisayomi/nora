@@ -8,6 +8,7 @@
 .button{
     display: flex;
     align-items: center;
+    border-radius: 20px;
     width: 100%;
 }
 .button > h1 {

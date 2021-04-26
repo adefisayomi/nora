@@ -3,6 +3,8 @@ import {Icon,Placeholder} from 'semantic-ui-react'
 import { GlobalState } from '../../../context/globalState'
 import ProfileTab from '../../re-usables/profileTab'
 import useSWR from 'swr'
+import DropDown from '../../re-usables/dropdown'
+import FollowButton from '../../re-usables/followButton'
 
 
 export default function ProductHeader ({id, title}) {
@@ -31,7 +33,10 @@ export default function ProductHeader ({id, title}) {
                </Placeholder>
             </div>
             }
-            <Icon name= 'ellipsis horizontal' link />
+            <DropDown list= {<FollowButton />} width= 'fit-content'>
+                <Icon name= 'ellipsis horizontal' link />
+            </DropDown>
+            
             </div>
     )
 }

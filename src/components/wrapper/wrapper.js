@@ -30,7 +30,7 @@ export default function Wrapper ({children}) {
     }
     // 
     // Axios defaults
-    axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? 'http://localhost:5000/api' : 'https://server.devbyclace.com/api'
+    axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? 'http://localhost:5000/api' : 'https://clace.devbyclace.com/api'
     axios.defaults.headers['Content-Type'] = 'application/json'
     axios.defaults.withCredentials = true
     // 
