@@ -3,13 +3,13 @@ import {Icon,Placeholder} from 'semantic-ui-react'
 import { GlobalState } from '../../../context/globalState'
 import ProfileTab from '../../re-usables/profileTab'
 import useSWR from 'swr'
-import DropDown from '../../re-usables/dropdown'
+import PopUp from '../../re-usables/pop_up'
 import FollowButton from '../../re-usables/followButton'
 
 
 export default function ProductHeader ({id, title}) {
 
-    const {UI} = GlobalState()
+    const {UI, user} = GlobalState()
     const {data: author} = useSWR(() => id ? `/user/${id}` : null)
 
     
@@ -33,10 +33,9 @@ export default function ProductHeader ({id, title}) {
                </Placeholder>
             </div>
             }
-            <DropDown list= {<FollowButton />} width= 'fit-content'>
-                <Icon name= 'ellipsis horizontal' link />
-            </DropDown>
-            
+            <PopUp position= 'bottom right' trigger= {<Icon name= 'ellipsis horizontal' link />}>
+                {user && id && user._id == id ? '' : <FollowButton id= {id} />}
+            </PopUp>
             </div>
     )
 }
